@@ -1,8 +1,21 @@
 <template>
-    <InventoryTable 
-    :products="product"
-    :movements="movements"
-    />
+    <div class="card p-4">
+        <div class="card-head p-2">
+            <CreateMovementModal
+            :title="product.name"
+            :productId="productId"
+            @refresh="refresh"
+            />
+        </div>
+    
+        <div class="card-body">
+            <InventoryTable 
+            :products="product"
+            :movements="movements"
+            />
+        </div>
+    </div>
+    
 </template>
 
 <script setup>
@@ -10,6 +23,7 @@ import { onMounted, reactive, ref } from 'vue';
 import axios from 'axios';
 import { useRoute } from 'vue-router';
 import InventoryTable from '@/components/tables/InventoryTable.vue';
+import CreateMovementModal from '@/components/modals/CreateMovementModal.vue';
 
 const route = useRoute();
 const productId = route.params.id;
@@ -18,7 +32,7 @@ const productId = route.params.id;
 const product = reactive({
 
     name       : '',
-    costing_method: null,
+    //costing_method: null,
 
 })
 /*const movements = reactive({
@@ -40,7 +54,7 @@ const getOneProduct = async (id) => {
         let datos = response.data
         console.log(datos)
         product.name = datos.name
-        product.costing_method = datos.inventory[0].costing_method
+        //product.costing_method = datos.inventory[0].costing_method
         console.log(product)
 
         datos.inventory_lots.forEach(element => {
@@ -72,8 +86,10 @@ const getOneProduct = async (id) => {
     //loading.value = false
 }
 
+function refresh() {
+    getOneProduct(productId)
+}
 
 
-
-onMounted(() => {getOneProduct(productId)})
+onMounted(() => {refresh()})
 </script>

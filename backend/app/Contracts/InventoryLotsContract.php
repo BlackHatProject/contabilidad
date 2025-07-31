@@ -11,7 +11,9 @@ interface InventoryLotsContract
 
     //public function consultAll(): Collection;
 
-    public function consultById(string $id): Model | null;
+    //public function consultById(string $id): Model | null;
+
+    public function consultFIFO(string $id): Model | null;
 
     public function store(array $data): Model;
 

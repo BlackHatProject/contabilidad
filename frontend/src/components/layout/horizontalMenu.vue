@@ -1,19 +1,19 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light h-100">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary h-100">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <RouterLink class="navbar-brand text-light" to="/">Navbar</RouterLink>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav flex align-items-center">
-                    <li class="nav-item">
+                    <!--li class="nav-item">
                     <RouterLink class="mx-2 p-2" to="/">Home</RouterLink>
-                    </li>
+                    </li-->
                     <li class="nav-item">
-                    <RouterLink class="mx-2 p-2" to="/products">Productos</RouterLink>
+                    <RouterLink class="mx-2 p-2 text-light" style="text-decoration:none" to="/">Productos</RouterLink>
                     </li>
-                    <li class="nav-item">
+                    <!--li class="nav-item">
                     <RouterLink class="mx-2 p-2" to="/inventory">Inventario</RouterLink>
                     </li>
                     <li class="nav-item dropdown">
@@ -25,7 +25,7 @@
                         <li><a class="dropdown-item" href="#">Another action</a></li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
-                    </li>
+                    </li-->
                 </ul>
             </div>
         </div>

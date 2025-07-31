@@ -1,10 +1,11 @@
 <template>
+    <horizontalMenu></horizontalMenu>
     <div class="container-fluid">
+        <div class="mb-4 p-2">
+            
+        </div>
         <div class="row">
             <div class="col-12">
-                <div class="mb-4 p-2">
-                    <horizontalMenu></horizontalMenu>
-                </div>
                 <div class="container">
                     <RouterView></RouterView>
                 </div>

@@ -15,11 +15,11 @@
             <tr v-for="product in props.products" :key="product.id">
                 <td>{{ product.id }}</td>
                 <td>{{ product.name }}</td>
-                <td>
+                <td class="d-flex">
                     <RouterLink :to="`/product/${product.id}`">
-                        <i class="bi bi-eye"></i>
+                        <i class="bi bi-eye fs-5" style="margin-right: .5em;"></i>
                     </RouterLink>
-                    <i class="bi bi-pencil"></i>
+                    <i class="bi bi-pencil fs-5"></i>
                 </td>
             </tr>
 

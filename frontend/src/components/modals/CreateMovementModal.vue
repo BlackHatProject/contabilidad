@@ -1,6 +1,6 @@
 <template>
     <div class="card-head d-flex justify-content-between p-2">
-        <h1>PRODUCTOS</h1>
+        <h1>{{ props.title }}</h1>
         <button type="button" class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <i class="bi bi-plus fs-4"></i>
         </button>
@@ -21,19 +21,21 @@
 
                 <div class="modal-body d-flex justify-content-center">
                     <div class="p-1 input-group row">
-                        <div class="col-12">
-                            <label for="">Nombre del producto</label><br>
-                            <input type="text" class="form-control w-100" v-model="createProducts.name">
-                        </div>
-                        <div class="col-12">
+                        <div class="col-12 mb-1">
                             <label for="">Cantidad</label><br>
-                            <input type="number" class="form-control w-100" v-model="createProducts.quantity">
+                            <input type="number" class="form-control w-100" v-model="createMovement.quantity">
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 mb-1">
                             <label for="">Precio del producto</label><br>
-                            <input type="number" class="form-control w-100" v-model="createProducts.price">
+                            <input type="number" class="form-control w-100" v-model="createMovement.price">
                         </div>              
-                    
+                        <div class="col-12 mb-1">
+                            <label for="">Tipo de movimiento</label><br>
+                            <select class="form-select" v-model="createMovement.entry_type" aria-label="Default select example">
+                                <option value="ENTRADA">ENTRADA</option>
+                                <option value="SALIDA">SALIDA</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
@@ -45,46 +47,50 @@
             </div>
         </div>
     </div>
+
 </template>
 
 <script setup>
-import { reactive } from 'vue';
-import { defineEmits } from 'vue';
+import { reactive, defineProps, defineEmits } from 'vue';
 import axios from 'axios';
 
+const props = defineProps({
+  title: {type: Array, required: true},
+  productId: {type: Array, required: true},
+  //movements: {type: Object, required: true},
+});
+console.log(props.productId)
 
-const createProducts = reactive({
+const createMovement = reactive({
 
-    name       : '',
     quantity   : 0,
     price      : 0.0,
-    entry_type : 'ENTRADA',
+    entry_type : '',
 
 })
 
-const emit = defineEmits(['refresh'])
-
-const clearProduct = () => {
-    createProducts.name=""
-    createProducts,quantity=0
-    createProducts.price=0.0
+const clearMovement = () => {
+    createMovement.quantity=0
+    createMovement.price=0.0
+    createMovement.entry_type=''
 }
+
+const emit = defineEmits(['refresh'])
 
 function storeProduct(){
 
     let data = {
-        name: createProducts.name,
-        quantity: createProducts.quantity,
-        price: createProducts.price,
-        entry_type: createProducts.entry_type,
+        product_id  : props.productId,
+        quantity: createMovement.quantity,
+        price: createMovement.price,
+        entry_type: createMovement.entry_type,
     }
-  //console.log(data)
+  console.log(data)
   try {
-    const response = axios.post('http://127.0.0.1:8000/api/products/store', data);
+    const response = axios.post('http://127.0.0.1:8000/api/inventoryLots/store', data);
     
     console.log('Éxito:', response.data);
-    clearProduct()
-    //emit('close-modal')
+    clearMovement()
     //emit("refresh")
     
   } catch (error) {
@@ -108,6 +114,7 @@ function storeProduct(){
     }
   }
 }
+
 
 
 </script>

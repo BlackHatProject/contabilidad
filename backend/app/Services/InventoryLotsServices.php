@@ -24,9 +24,9 @@ class InventoryLotsServices implements InventoryLotsContract
         return $this->repository->store($data);
     }
 
-    public function consultById(string $id): ?Model
+    public function consultFIFO(string $id): ?Model
     {
-        return $this->repository->consultById($id);
+        return $this->repository->consultFIFO($id);
     }
 
     /*public function storeProduct(array $data): Model

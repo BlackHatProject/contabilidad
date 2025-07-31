@@ -4,6 +4,7 @@ namespace App\Repository;
 
 //use App\Models\InventoryLots;
 
+use App\Models\Inventories;
 use App\Models\InventoryLots;
 use App\Models\Movements;
 use App\Models\Products;
@@ -24,6 +25,11 @@ class ProductsRepository
         $product = Products::create(
             ['name' => $data['name'], 'user_id' => $data['user_id']]
         );
+
+        $inventory = Inventories::create(
+            ['product_id' => $product->id, 'costing_method' => "FIFO"]
+        );
+
         $inventory_lots = InventoryLots::create(
             ['product_id' => $product->id, 
              'entry_date' => $data['entry_date'], 
@@ -31,6 +37,7 @@ class ProductsRepository
              'unit_cost' => $data['price'], 
              'remaining_quantity' => $data['quantity']]
         );
+        
         $movement = Movements::create(
             ['inventory_lots_id' => $inventory_lots->id, 
              'movement_date' => $data['entry_date'],
